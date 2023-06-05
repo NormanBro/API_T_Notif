@@ -29,7 +29,6 @@ function PostUsuario(req,res){
         }
     })
 }
-
 function PostCarrera(req,res){
     const IDCarrera=Math.floor(Math.random() * 10000);
     const{
@@ -109,9 +108,40 @@ function PostUnidadAcademica(req,res){
     })
 }
 
+function PostNotificacion(req,res){
+    const IDNotificacion=Math.floor(Math.random() * 10000);    
+    let date = new Date();
+    const {
+        Titulo,
+        Descripcion
+    }=req.body
+
+    Fecha=` ${date.getUTCFullYear()}-${date.getUTCMonth()}-${date.getUTCDate()}`
+    console.log({IDNotificacion,Titulo,Descripcion,Fecha})
+    const QUERRY="Insert into Notificacion VALUES ('"+IDNotificacion+"','"+Titulo+"','"+Descripcion+"','"+Fecha+"','"+0+"');"
+    Conexion.query(QUERRY,(err,result,field)=>{
+        if(!err){
+            res.json(
+                {
+                    "Message":"Insertado",
+                    "Result":result
+                }
+            )
+        }else{
+            res.json(
+                {
+                    "Message":"No Insertado"
+                }
+            )
+        }
+    })
+    
+}
+
 module.exports={
     PostUsuario,
     PostCarrera,
     PostDepartamento,
-    PostUnidadAcademica
+    PostUnidadAcademica,
+    PostNotificacion
 }

@@ -73,6 +73,26 @@ function GetUnidadAcademicaID(req,res){
     )
 }
 
+function GetNotificacion(req,res){
+    const Querry="Select * from Notificacion;"
+    Connection.query(
+        Querry,
+        (err,row,field)=>{
+            res.json(row);
+        }
+    )
+}
+
+function GetNotificacionID(req,res){
+    const Querry="Select * from Notificacion WHERE IDNotificacion='"+req.params.id+"';";
+    Connection.query(
+        Querry,
+        (err,row,field)=>{
+            res.json(row);
+        }
+    )
+}
+
 module.exports={
     GETUsuario,
     GetUsuarioID,
@@ -81,5 +101,7 @@ module.exports={
     GetDepartamento,
     GetDepartamentoID,
     GetUnidadAcademica,
-    GetUnidadAcademicaID
+    GetUnidadAcademicaID,
+    GetNotificacion,
+    GetNotificacionID
 }
